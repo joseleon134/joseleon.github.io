@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block content %}
+   <h1>{% block title %} Bienvenidos a FBlog {% endblock %}</h1>
+   <center><img src="https://escolapiosalcala.es/ea_centro/ea_blog/centro/wp-content/uploads/2016/01/blogs.png" width="400" height="200"></center>
+   
+   {% for post in post %}
+   <div class="card">
+      <a href="{{ url_for('post', post_id=post['id']) }}">
+         <h2>{{ post['titulo'] }}</h2>
+      </a>
+      <span>{{ post['created'] }}</span>
+
+      <a href="{{ url_for('edit', id=post['id']) }}">
+      <span class="badge badge-warning">Editar</span>
+      </a>
+      <hr>
+   </div>
+   {% endfor %}
+   <br><br><br>
+   <div class="caja">
+      Proyecto creado por:<br>
+      Jose Leon, 27.549.901<br>
+      Kevin Lisboa, 30.020.937<br>
+      Seccion 03<br>
+      Revisado por:<br>
+      Prof. Victor Esteller<br>
+      Computacion II<br>
+      Correo de contacto: Joseale134@gmail.com<br>
+   </div>
+
+   <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyCs70UznwCYdFquda-zyVLkfYU51CdOTjg",
+        authDomain: "fblog-fd2b7.firebaseapp.com",
+        projectId: "fblog-fd2b7",
+        storageBucket: "fblog-fd2b7.appspot.com",
+        messagingSenderId: "210600571892",
+        appId: "1:210600571892:web:ae1ada63a2d71f9c117fa1",
+        measurementId: "G-3QK1CEDT71"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+
+{% endblock %}
+
