@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <h3>{% block title %} {{ post['titulo'] }} {% endblock %}</h2>
+   <span>{{ post['created'] }}</span>
+
+   <p>{{ post['contenido'] }}</p>
+   <div>
+      <center><img src="{{ post['archivo'] }}" width="300" height="300"></center>
+   </div><br><br>
+
+   
+
+   <div id="comment-section">
+      <h5>Comentarios</h5>
+      <div class="card" id="comments-container"></div><br><br>
+    </div>
+    
+    <div>
+      <h5>Dejanos tu comentario...</h5><br>
+      <textarea id="comment-input"></textarea><br><br>
+      <button id="submit-button" class="button-85" role="button">Enviar</button><br><br>
+    </div>
+
+   <script>
+      const submitButton = document.getElementById("submit-button");
+      const commentInput = document.getElementById("comment-input");
+      const commentsContainer = document.getElementById("comments-container");
+
+      submitButton.addEventListener("click", function() {
+      const comment = commentInput.value;
+      const commentElement = document.createElement("div");
+      commentElement.innerHTML = comment;
+      commentsContainer.appendChild(commentElement);
+      commentInput.value = "";
+      });
+   </script>
+{% endblock %}

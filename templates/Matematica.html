@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initialscale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+crossorigin="anonymous">
+<title>{% block title %} {% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="../static/css/menu.css" />
+<link href='https://fonts.googleapis.com/css?family=Annie Use Your Telescope' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=IBM Plex Mono' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Lemon' rel='stylesheet'>
+
+</head>
+<body>
+
+<nav id='menu'>
+      <ul>
+        <li><a class="navbar-brand" href="{{url_for('index')}}">Inicio</a></li>
+        <li><a class="nav-link" href="{{url_for('create')}}">Añadir Publicación</a></li>
+
+        <li><a class='dropdown-arrow' href="{{url_for('index')}}">Categorias</a>
+          <ul class='sub-menus'>
+            <li><a href="{{url_for('Romanticismo')}}">Romanticismo</a></li>
+            <li><a href="{{url_for('Matematica')}}">Matematica</a></li>
+            <li><a href="{{url_for('Deporte')}}">Deporte</a></li>
+            <li><a href="{{url_for('Arte')}}">Arte</a></li>
+          </ul>
+        </li>
+      </ul>
+</nav>
+
+<div class="container">
+   {% for message in get_flashed_messages() %}
+<div class="alert alert-danger">{{ message }}</div>
+   {% endfor %}
+{% block content %} 
+<h1>FBlog MATEMATICA</h1>
+<center><img src="static\css\math_3.jpg" width="400" height="200"></center>
+
+{% for post in post %}
+<div class="card">
+   <a href="{{ url_for('post', post_id=post['id']) }}">
+      <h2>{{ post['titulo'] }}</h2>
+   </a>
+   <span>{{ post['created'] }}</span>
+
+   <a href="{{ url_for('edit', id=post['id']) }}">
+   <span class="badge badge-warning">Editar</span>
+   </a>
+   <hr>
+</div>
+{% endfor %}
+{% endblock %}
+</div>

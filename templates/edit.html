@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{% block title %} Editar Publicación "{{ post['titulo'] }}" {% endblock %}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="titulo">Titulo</label>
+        <input type="text" name="titulo" placeholder="Titulo"
+               class="form-control"
+               value="{{ request.form['titulo'] or post['titulo'] }}">
+        </input>
+    </div>
+    <div class="form-group">
+        <label for="contenido">Contenido</label>
+        <input type='text' name="contenido" placeholder="contenido"
+              class="form-control"
+              value="{{ request.form['contenido'] or post['contenido'] }}"></input>
+    </div>
+    
+    <div class="form-group">
+        <label for="archivo">Archivos</label>
+        <h4>INSERTAR ARCHIVO NUEVAMENTE!</h4>
+        <input type="file" id="archivo" 
+              class="form-control" name="archivo" 
+              accept="image/*" multiple value="{{ request.files['imagen']}}"></input>
+    </div>
+
+    <div class="form-group">
+        <label for="Categoria">Categoria</label><br>
+        <h4>ELEGIR CATEGORIA NUEVAMENTE!</h4>
+        <select name="Categoria">
+        <option value="0"></option>
+        <option value="1">Romanticismo</option>
+        <option value="2">Matematica</option>
+        <option value="3">Deporte</option>
+        <option value="4">Arte</option>
+        </select>
+     </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Aceptar</button>
+    </div>
+</form>
+
+<form action="{{ url_for('delete', id=post['id']) }}" method="POST" enctype="multipart/form-data">
+    <input type="submit" value="Eliminar Publicación"
+           class="btn btn-danger btn-sm"
+           onclick="return confirm('Are you sure you want to delete this post?')">
+</form>
+
+{% endblock %}
